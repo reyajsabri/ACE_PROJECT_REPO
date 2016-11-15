@@ -1,0 +1,113 @@
+<div class="container" id="mainArea">
+	<div class="left">
+		<form id="addForm" name="addForm">
+			<fieldset>
+				<label id="cacheSizeLabel" for="cacheSize" style="float: left">Enter Cache Size:</label>
+				<input type="text" name="cacheSize" id="cacheSize" class="txtfield"
+					tabindex="1" ng-model="v_cacheSize" /> <label id="timeToLiveLabel" for="timeToLive"
+					style="float: left">Enter Time to Live (in Seconds and > 5):</label> <input
+					type="text" name="timeToLive" id="timeToLive" class="txtfield"
+					tabindex="2" ng-model="v_timeToLive" />
+
+				<div class="left" id="createCacheButtons">
+					<input type="button" name="createCache" id="createCache"
+						class="flatbtn-blu hidemodal" value="CreateCache" tabindex="3"
+						ng-click="createCache()" />
+				</div>
+
+			</fieldset>
+		</form>
+	</div>
+	<div class="left">
+		<form id="inputObjectform" name="inputObjectform">
+			<fieldset>
+				<label for="firstName" style="float: left">Enter First NAme:</label>
+				<input type="text" name="firstName" id="firstName" class="txtfield"
+					tabindex="4" ng-model="v_firstName" /> <label for="lastName"
+					style="float: left">Enter Last NAme:</label> <input type="text"
+					name="lastName" id="lastName" class="txtfield" tabindex="5"
+					ng-model="v_lastName" />
+
+				<div class="left" id="createPersoButton">
+					<input type="button" name="createPerson" id="createPerson"
+						class="flatbtn-blu hidemodal" value="Create Person" tabindex="6"
+						ng-click="createPerson()" />
+				</div>
+
+			</fieldset>
+		</form>
+
+	</div>
+	<div class="left">
+		<form id="findObjectform" name="findObjectform">
+			<fieldset>
+				<label for="findPerson" style="float: left">Enter Person id
+					for search:</label> <input type="text" name="findPerson" id="findPerson"
+					class="txtfield" tabindex="6" ng-model="v_findPerson" />
+
+				<div class="left" id="findPersoButton">
+					<input type="button" name="findPerson" id="findPerson"
+						class="flatbtn-blu hidemodal" value="Find Person" tabindex="7"
+						ng-click="findPerson()" />
+				</div>
+
+			</fieldset>
+		</form>
+	</div>
+	<div class="cacheSnapshotArea" align="center">
+		<form id="findObjectform" name="findObjectform">
+			<fieldset>
+				<table cellspacing="10" cellpadding="10" style="float: left">
+					<tr class="tableheader">
+						<th scope="col" title="ID" width="20">ID</th>
+
+						<th scope="col" title="First Name">First Name</th>
+						<th scope="col" title="Last Name">Last Name</th>
+						<th scope="col" title="Creation Time">Creation Time</th>
+					</tr>
+					<tr ng-repeat="record in repository" class="">
+						<td>{{ record.id }}</td>
+						<td>{{ record.firstName }}</td>
+						<td>{{ record.lastName }}</td>
+						<td>{{ record.creationTime }}</td>
+
+					</tr>
+				</table>
+				<table cellspacing="10" cellpadding="10" style="float: left">
+					<tr class="tableheader">
+						<th scope="col" title="ID" width="20">ID</th>
+
+						<th scope="col" title="First Name">First Name</th>
+						<th scope="col" title="Last Name">Last Name</th>
+						<th scope="col" title="Creation Time">Creation Time</th>
+					</tr>
+					<tr ng-repeat="cacheRecord in cacheRecords" class="">
+						<td>{{ cacheRecord.id }}</td>
+						<td>{{ cacheRecord.firstName }}</td>
+						<td>{{ cacheRecord.lastName }}</td>
+						<td>{{ cacheRecord.cachedTime }}</td>
+
+					</tr>
+				</table>
+			</fieldset>
+		</form>
+	</div>
+	<div class="ConsoleArea">
+		<form id="consoleViewform" name="consoleViewform">
+			<fieldset>
+				<div align="right" id="actionDesc">
+					<table cellspacing="10" cellpadding="10">
+						<tr class="tableheader">
+							<th scope="col" title="Action Description">Action
+								Description</th>
+						</tr>
+						<tr ng-repeat="consoleLine in consoleLines" class="">
+							<td>{{ consoleLine.description }}</td>
+						</tr>
+					</table>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+
