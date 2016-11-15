@@ -235,7 +235,19 @@ p {
 
 
 #mainArea {
-  width: 700px;
+  width: 750px;
+  padding: 8px 20px;
+  background: #f3f6fa;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+#w {
+  width: 800px;
   padding: 8px 20px;
   background: #f3f6fa;
   -webkit-border-radius: 6px;
@@ -247,7 +259,7 @@ p {
 }
 
 .formArea {
-  width: 700px;
+  width: 750px;
   padding: 20px 20px;
   background: #f3f6fa;
   -webkit-border-radius: 6px;
