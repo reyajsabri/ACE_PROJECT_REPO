@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en-US" >
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <title>JMS application Demo</title>
+  <link rel="stylesheet" type="text/css" media="all" href="static/pages/css/style.css"/>
+  
+  <script type="text/javascript" src="static/pages/js/angular.min.js"></script>
+  <script type="text/javascript" src="static/pages/js/angular-route.min.js"></script>
+  <script type="text/javascript" src="static/pages/js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="static/pages/js/jquery.table2excel.js"></script>
+  <script type="text/javascript" src="static/pages/js/index.js"></script>
+  
+</head>
+
+<body ng-app="JMS-Application">
+  
+  
+  <div id="w" class="container" ng-controller="indexController">
+    <div id="content" class="container" ng-init="label='JMS Main-Page'">
+      <center>
+		<h1>JMS application Demo!</h1>
+		<div id="topbar" >
+            <a href="{{nextPage}}" class="flatbtn" id="mainpageTrigger" ng-click="configView()">{{label}}</a>
+        </div>
+		<p> Required: JMS Server need to be up and running as per jndi.properties configuration.<br/>
+		Application is a part of ACE-Training HandsOn Exercise.<br/>.
+		Assignment: 
+		1.	Setup Active MQ and create 2 queues - >orderQueue and executedOrderQueue.<br/>
+2.	Create one Order and send it to orderQueue. Perform at least 2 validations while creation of order. Ex- Price cannot be 0 or –ve. Throw custom exception in this scenario.<br/>
+3.	Once the order is received on queue, process it by changing the status of order as “Processed�?. While processing, you need to validate the order quantity if it is available or not ( Assume some quantity for an item). If not then do not process the order and throw exception.<br/>
+4.	If quantity is available then change the status and send the updated order back on executedOrderQueue. When the order is received on executedOrderQueue , display the message to the user that order has been processed successfully along with order details.<br/>
+		
+        </p>
+	  </center>
+	  
+      <center>
+        <div class="container" ng-view>
+        </div>
+      </center>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en-US" >
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <title>Producer-Consumer application Demo</title>
+  <link rel="stylesheet" type="text/css" media="all" href="static/pages/css/style.css"/>
+  
+  <script type="text/javascript" src="static/pages/js/angular.min.js"></script>
+  <script type="text/javascript" src="static/pages/js/angular-route.min.js"></script>
+  <script type="text/javascript" src="static/pages/js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="static/pages/js/jquery.table2excel.js"></script>
+  <script type="text/javascript" src="static/pages/js/index.js"></script>
+  
+</head>
+
+<body ng-app="Producer-ConsumerApp">
+  
+  
+  <div id="w" class="container" ng-controller="indexController">
+    <div id="content" class="container" ng-init="label='Proceed'">
+      <center>
+		<h1>Producer-Consumer application Demo!</h1>
+		<div id="topbar" >
+            <a href="{{nextPage}}" class="flatbtn" id="mainpageTrigger" ng-click="configView()">{{label}}</a>
+        </div>
+		<p>Sapient ACE-Assignment 3 : Producer - Consumer <br/>
+Producer-Consumer is impplemented with java.util.concurrent.Exchanger. Alternatively, ArrayBlocking queue will work fine if.<br>.
+Producer calls put() whereas Consumer calls take() blocking methods.
+
+In this Application, instead of producing and consuming element by element, Application exchanges a bunch of elements [buffered] once at a time with Consumer.
+        </p>
+	  </center>
+	  
+      <center>
+        <div class="container" ng-view>
+        </div>
+      </center>
+    </div>
+  </div>
+</body>
+</html>

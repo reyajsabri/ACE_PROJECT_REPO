@@ -1,0 +1,40 @@
+<div class="container" id="mainArea" >
+<form id="jmsApplicationForm" name="jmsApplicationForm" >
+    <fieldset>
+      <label for="itemID" style="float: left">Item ID:</label>
+      <input type="text" name="itemID" id="itemID" class="txtfield"  tabindex="1" ng-model="v_itemID"/>
+      
+      <label for="description" style="float: left">Item Description:</label>
+      <input type="text" name="description" id="description" class="txtfield"  tabindex="2" ng-model="v_description"/>
+      
+      <label for="price" style="float: left">Price:</label>
+      <input type="text" name="price" id="price" class="txtfield"  tabindex="3" ng-model="v_price"/>
+      
+      <label for="quantity" style="float: left">Quantity:</label>
+      <input type="text" name="quantity" id="quantity" class="txtfield"  tabindex="4" ng-model="v_quantity"/> *Quantity must be less than 3
+      
+      <div class="center">
+      <a href="{{nextPage}}" name="publish" id="publish" class="flatbtn-blu hidemodal" value="Publish" tabindex="5" ng-click="doPublish()">Publish</a>
+      <input type="button" name="reset" id="reset" class="flatbtn-blu hidemodal" value="Reset" tabindex="6" ng-click="resetData()"/>
+      </div>
+	  </fieldset>
+    </form>
+
+ 
+</div>
+<div class="formArea">
+<form id="resultform" name="resultform">
+<table cellspacing="10" cellpadding="10">
+    <tr class="tableheader">
+       <th scope="col" title="Output">Output</th>
+    </tr>
+    <tr ng-repeat="record in outputRecords" class="{{record.errorClass}}">
+    <td>{{ record.status }}</td>
+  </tr>
+</table>
+
+<div align="right">
+      <input type="button" name="clear" id="clear" class="flatbtn-blu hidemodal" value="Clear output" tabindex="7" ng-click="doclearOutput()"/>
+</form>
+</div>
+</div>

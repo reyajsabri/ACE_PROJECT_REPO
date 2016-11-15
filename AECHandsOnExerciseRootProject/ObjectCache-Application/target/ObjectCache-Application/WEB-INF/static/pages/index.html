@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en-US" >
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <title>ThreadPool Concurrent Download- Application Demo</title>
+  <link rel="stylesheet" type="text/css" media="all" href="static/pages/css/style.css"/>
+  
+  <script type="text/javascript" src="static/pages/js/angular.min.js"></script>
+  <script type="text/javascript" src="static/pages/js/angular-route.min.js"></script>
+  <script type="text/javascript" src="static/pages/js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="static/pages/js/index.js"></script>
+  
+</head>
+
+<body ng-app="ObjectCache-Application">
+  
+  
+  <div id="w" class="container" ng-controller="indexController">
+    <div id="content" class="container" ng-init="label='Proceed'">
+      <center>
+		<h1>ObjectCache-Application Demo!</h1>
+		<div id="topbar" >
+            <a href="{{nextPage}}" class="flatbtn" id="mainpageTrigger" ng-click="configView()">{{label}}</a>
+        </div>
+		 <br/>
+		Sapient ACE-Assignment : Object Cache<br/>
+<br/>
+ObjectCache-Application is a Object Cache use-case implementation.
+Application uses Object Cache module for the implementation.<br/>
+"Object Cache" module is a LRU bases cache implementation and uses underlying ConcurrentHashMap to store cached Objects </h2><br/>
+<h1>Cache Eviction Policy</h1>
+1: LRU - Least recently Used
+<p><h2>"Object Cache" removes Least Recently Used objects when storing new object and size is overflow (hence LRU)</h2></p><br/>
+2: Time bound
+<p><h2> Object to be fetch from cache, 
+<p>1:if expired(exceeds timeToLive in cache), the Object will be removed from cache and a fresh call
+will be triggered to Object-Finder to fetch fresh Object from repository.</h2></p>
+<p>2:if calls happen within expired(exceeds timeToLive in cache) time, the Object's timeToLive will be Renewed in cache. No call
+will be triggered to Object-Finder.</h2></p>
+</p>
+	  </center>
+	  
+      <center>
+        <div class="container" ng-view >
+        </div>
+      </center>
+    </div>
+  </div>
+</body>
+</html>
