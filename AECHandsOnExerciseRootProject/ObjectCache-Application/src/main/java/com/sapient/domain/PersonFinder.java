@@ -17,8 +17,8 @@ public class PersonFinder<L extends BlockingQueue<String>, R extends Repository<
 	
 	@Override
 	public Person findObject(Integer a) throws InterruptedException {
-		System.out.println("Cache Miss occured for ID: "+a+". So, fetching from Repository");
-		console.add("Cache Miss occured for ID: "+a+". So fetching from Repository");
+		System.out.println("Cache Miss occured for ID: "+a+". So, fetching from Repository which will be added back to cache");
+		console.add("Cache Miss occured for ID: "+a+". So fetching from Repository which will be added back to cache");
 		Person p = repo.getFromDatabase(a);
 		p.setCachedTime(new Date().toString());
 		return p;
