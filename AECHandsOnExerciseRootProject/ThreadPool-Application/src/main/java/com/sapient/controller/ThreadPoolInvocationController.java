@@ -112,7 +112,7 @@ public class ThreadPoolInvocationController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/getDownloadData/{key}/{taskId}", method = RequestMethod.GET, consumes = "application/json", produces = "application/octet-stream")
+	@RequestMapping(value = "/getDownloadData/{key}/{taskId}", method = RequestMethod.POST, consumes = "application/json", produces = "application/octet-stream")
 	public @ResponseBody byte[] getDownloadData(@PathVariable Integer key, @PathVariable Integer taskId) {
 		
 		List<Future<TaskDesc>> futures = resultMap.get(key);
