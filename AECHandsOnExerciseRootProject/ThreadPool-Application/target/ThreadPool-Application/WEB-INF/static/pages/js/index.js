@@ -190,38 +190,72 @@ angular.module('ThreadPoolDownloadApp', [ 'ngRoute' ]).config(
 	};
 	
 	$scope.saveFile = function(index){
-		var fileUrl = $scope.downLoadTasks[index].url;
-		var fileUrlSplit = JSON.stringify(fileUrl).split('/');
+		var fileUrl = $scope.downLoadTasks[index].url; 
+		var fileUrlSplit = fileUrl.split('/');
 		var fileName = fileUrlSplit[fileUrlSplit.length-1];
 		alert("FileName:"+fileName);
-		jQuery.ajax({
-			async : false,
-			url : "/ThreadPool-Application/getDownloadData/"+downloadKey+"/"+index,
-			type : "GET",
-			dataType : "application/octet-stream",
-			processData: false,
-			contentType : "application/json; charset=utf-8",
-			responseType : 'application/octet-stream; charset=utf-8',
-			success : function(response) {
-				alert("Save Success"+JSON.stringify(response));
-				data = response;
-				
-			},
-			error : function(response) {
-				if(response.status == 200 && response.statusText == "OK"){
-					alert("Save Error:"+response.responseText);
-					var blob = new Blob([response.responseText], {type: 'application/octet-stream; charset=utf-8'});
-					var dataURL = window.URL.createObjectURL(blob);
-					var a = document.createElement("a");
-		            document.body.appendChild(a);
-		            a.style = "display: none";
-	                a.href = dataURL;
-	                a.download = fileName;
-	                a.click();
-
-				}
-			}
-		});
+		
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', '/ThreadPool-Application/getDownloadData/'+downloadKey+'/'+$scope.downLoadTasks[index].id, true);
+		xhr.responseType = 'blob';
+		xhr.setRequestHeader('Content-Type', 'application/json')
+		xhr.overrideMimeType('application/octet-stream; charset=x-user-defined');
+		xhr.onload = function(e) {
+		  //var arrayBuffer = xhr.response;
+		  //var byteArray = new Uint8Array(arrayBuffer);
+		  //var blob = new Blob(byteArray, {type: 'application/octet-stream; charset=x-user-defined'});
+		  blob = xhr.response;
+		  var dataURL = window.URL.createObjectURL(blob);
+		  var a = document.createElement("a");
+          document.body.appendChild(a);
+          a.style = "display: none";
+          a.href = dataURL;
+          a.download = fileName;
+          a.click();
+		};
+		xhr.send();
+//		jQuery.ajaxTransport( 'binary', function( options, originalOptions, jqXHR ) {
+//			  if( true ) {
+//			    return {
+//			      send: function( headers, completeCallback ) {
+//			        // Send code
+//			      },
+//			      abort: function() {
+//			        // Abort code
+//			      }
+//			    };
+//			  }
+//			});
+//		
+//		jQuery.ajax({
+//			async : false,
+//			url : "/ThreadPool-Application/getDownloadData/"+downloadKey+"/"+$scope.downLoadTasks[index].id,
+//			type : "POST",
+//			dataType : "binary",
+//			headers:{'Content-Type':'image/png','X-Requested-With':'XMLHttpRequest'},
+//			processData: false,
+//			contentType : "application/json; charset=x-user-defined'",
+//			responseType : 'arrayBuffer',
+//			success : function(response) {
+//				alert("Save Success"+JSON.stringify(response));
+//				data = response;
+//				
+//			},
+//			error : function(response) {
+//				if(response.status == 200 && response.statusText == "OK"){
+//					alert("Save Error:"+response.responseText);
+//					var blob = new Blob([response.responseText], {type: 'application/octet-stream;'});
+//					var dataURL = window.URL.createObjectURL(blob);
+//					var a = document.createElement("a");
+//		            document.body.appendChild(a);
+//		            a.style = "display: none";
+//	                a.href = dataURL;
+//	                a.download = fileName;
+//	                a.click();
+//
+//				}
+//			}
+//		});
 	};
 
 });
