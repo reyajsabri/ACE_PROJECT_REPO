@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -17,13 +18,15 @@ public class DownLoadTaskImpl implements StatusAwareCallable<TaskDesc> {
 
 	private volatile int completionProgress;
 	private final TaskDesc statusDesc;
+	private final String downloadDir;
 	private URLConnection con;
 	private int contentLength;
 	
 	private byte[] buffer = new byte[1024];
 	private byte[] content;
-	public DownLoadTaskImpl(TaskDesc statusDesc){
+	public DownLoadTaskImpl(String downloadDir, TaskDesc statusDesc){
 		this.statusDesc = statusDesc;
+		this.downloadDir = downloadDir;
 	}
 	
 	@Override
@@ -59,15 +62,17 @@ public class DownLoadTaskImpl implements StatusAwareCallable<TaskDesc> {
 	        	System.arraycopy(buffer, 0, content, currentPos, byteRead);
 	        	out.write(buffer, 0,byteRead);
 	        	currentPos = currentPos + byteRead;
-	        	completionProgress = currentPos == 0 ? 0 : (int)(currentPos*100)/contentLength;
+	        	BigInteger tempPose = BigInteger.valueOf(currentPos);
+	        	
+	        	completionProgress = currentPos == 0 ? 0 : tempPose.multiply(BigInteger.valueOf(100)).divide(BigInteger.valueOf(contentLength)).intValue();
 	        	
 	        	System.out.println(Thread.currentThread().getName() + " Completed: "+completionProgress +"%");
 	        	
-	        	Thread.sleep(10);
+	        	Thread.sleep(5);
 	        	
 	        }
 	        String[] urlArr = statusDesc.getUrl().split("/");
-	        output = new FileOutputStream("D:/ACE Final/"+urlArr[urlArr.length-1]);
+	        output = new FileOutputStream(downloadDir + "/"+urlArr[urlArr.length-1]);
 	        
 	        
 	        

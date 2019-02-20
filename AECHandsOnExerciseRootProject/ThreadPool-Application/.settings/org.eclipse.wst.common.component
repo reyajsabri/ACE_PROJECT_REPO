@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="ThreadPool-Application">
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <dependent-module archiveName="Thread-Pool-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Thread-Pool/Thread-Pool">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="ThreadPool-Application"/>
+        <property name="java-output-path" value="/ThreadPool-Application/target/classes"/>
+    </wb-module>
+</project-modules>

@@ -58,7 +58,7 @@ public class ThreadPoolInvocationController {
 			task.setId(""+id);
 			task.setUrl(url);
 			taskList.add(task);
-			DownLoadTaskImpl download = new DownLoadTaskImpl(task);
+			DownLoadTaskImpl download = new DownLoadTaskImpl(System.getProperties().getProperty("user.dir"), task);
 			downloadList.add(download);
 		}
 		//FIXME separate class for key need to be implemented
@@ -111,8 +111,17 @@ public class ThreadPoolInvocationController {
 		return pool.isCompleted();
 	}
 	
+	/**
+	 * Get byte array data of downloaded file.
+	 * curl -X GET http://localhost:8080/ThreadPool-Application/getDownloadData/2/0 
+	 * -H "Content-Type:application/json" -H "Accept:application/octet-stream; charset=utf-8" 
+	 * --output C:\ReyajData\<FileName>.<FileType>
+	 * @param key
+	 * @param taskId
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/getDownloadData/{key}/{taskId}", method = RequestMethod.POST, consumes = "application/json", produces = "application/octet-stream")
+	@RequestMapping(value = "/getDownloadData/{key}/{taskId}", method = RequestMethod.GET, consumes = "application/json", produces = "application/octet-stream; charset=utf-8")
 	public @ResponseBody byte[] getDownloadData(@PathVariable Integer key, @PathVariable Integer taskId) {
 		
 		List<Future<TaskDesc>> futures = resultMap.get(key);
